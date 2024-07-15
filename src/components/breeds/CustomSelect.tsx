@@ -13,6 +13,8 @@ interface Props {
   placeholder: string;
   contentCls: string;
   children: React.ReactNode;
+  // handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  // value: string;
 }
 
 const CustomSelect: React.FC<Props> = (props) => {
