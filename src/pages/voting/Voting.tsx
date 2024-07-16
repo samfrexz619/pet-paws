@@ -64,7 +64,7 @@ const Voting = () => {
         }
       </div>
       {/* reaction logs */}
-      <div className="w-full lg:mt-14 mt-20">
+      <div className="w-full lg:mt-14 mt-14 max-h-[15vh] overflow-y-scroll">
         {likedImages.map(item => (
           <ReactionLog key={item.id} icon='like' imageId={item.id} />
         ))}

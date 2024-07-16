@@ -50,10 +50,6 @@ module.exports = {
         '96%': '96%',
 
       },
-      backgroundImage: {
-        bgl: "url('./src/assets/images/girl-pet.png')",
-        dgl: "url('./src/assets/images/dark-girl.png')"
-      },
       borderRadius: {
         10: '10px',
         5: '5px',
