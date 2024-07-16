@@ -1,16 +1,13 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import NavPath from '@/components/voting/NavPath';
 import { useGetBreeds } from '@/hooks/useGetBreeds';
 import useImgUrl from '@/hooks/useImgUrl';
 
-interface Props {
 
-}
+const BreedDetail = () => {
 
-const BreedDetail: React.FC<Props> = (props) => {
   const { id } = useParams();
-  const { breeds, loading } = useGetBreeds()
+  const { breeds } = useGetBreeds()
 
   const breedItem = breeds.find(breed => breed.id === id)
 

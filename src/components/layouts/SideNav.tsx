@@ -1,14 +1,11 @@
-import React from 'react';
 import CardLink from "@/components/cardlink/CardLink";
 import { cardItems } from "@/components/cardlink/card";
 import ToggleSwitch from '../toggle/ToggleSwitch';
 import { NavLink } from 'react-router-dom';
 
-interface Props {
 
-}
 
-const SideNav: React.FC<Props> = (props) => {
+const SideNav = () => {
   return (
     <aside className='lg:w-3/4 w-95 mx-auto'>
       <header className="w-full h-24 items-center flex justify-between">

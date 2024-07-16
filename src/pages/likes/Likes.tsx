@@ -1,11 +1,10 @@
-import { useState } from "react";
 import EmptyState from "@/components/EmptyState";
 import NavPath from "@/components/voting/NavPath";
 import useGetCatApi from "@/hooks/useGetCatApi";
 // import { CatList } from "@/types/cardTypes";
 
 const Likes = () => {
-  const { loading, likedImages } = useGetCatApi();
+  const { likedImages } = useGetCatApi();
   // const [likes, setLikedImages] = useState<CatList[]>(JSON.parse((localStorage.getItem('liked-images') as string)) || [])
 
   return (

@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import useGetCatApi from "@/hooks/useGetCatApi";
 import NavPath from "@/components/voting/NavPath";
 import ImageSlide from "@/components/voting/ImageSlide";

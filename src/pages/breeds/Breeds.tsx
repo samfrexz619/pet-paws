@@ -75,11 +75,10 @@ const Breeds = () => {
       <section className="w-full max-h-[75vh] overflow-y-scroll reset">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {
-            breeds?.slice(0, parseInt(selectVal)).map((breed, index) => (
+            breeds?.slice(0, parseInt(selectVal)).map((breed) => (
               <BreedImage
                 key={breed.id}
                 breedImg={breed}
-                index={index}
                 breed={breed?.name}
                 breedId={breed.id}
               />

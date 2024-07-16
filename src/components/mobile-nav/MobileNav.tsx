@@ -1,14 +1,9 @@
-import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { cardItems } from '../cardlink/card';
 
 
-interface Props {
-
-}
-
-const MobileNav: React.FC<Props> = (props) => {
+const MobileNav = () => {
   const { pathname } = useLocation();
 
   return (

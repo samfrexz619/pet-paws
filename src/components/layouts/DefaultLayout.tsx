@@ -1,15 +1,11 @@
-import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 // components
 import SideNav from './SideNav';
 import PageHeader from './PageHeader';
 
-interface Props {
 
-}
-
-const DefaultLayout: React.FC<Props> = (props) => {
+const DefaultLayout = () => {
   return (
     <main className='w-full lg:flex lg:justify-between block dark:bg-pry-dark dark:text-white min-h-screen'>
       <div className='hidden lg:block lg:w-1/2 w-0'>

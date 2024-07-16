@@ -1,12 +1,8 @@
-import React from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 
 
-interface Props {
 
-}
-
-const NavPath: React.FC<Props> = (props) => {
+const NavPath = () => {
   const { pathname } = useLocation();
 
   const navigate = useNavigate()

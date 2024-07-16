@@ -5,7 +5,6 @@ import useImgUrl from '@/hooks/useImgUrl';
 
 interface Props {
   breedImg: Breed;
-  index: number;
   breed: string;
   breedId: string;
 }
@@ -14,7 +13,7 @@ const BreedImage: React.FC<Props> = (props) => {
 
   const [hoveredImg, setHoveredImg] = useState<null | string>(null)
 
-  const { breedImg, index, breed, breedId } = props;
+  const { breedImg, breed, breedId } = props;
 
   const { imgUrl, handleError } = useImgUrl(breedImg)
 
