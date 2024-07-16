@@ -18,7 +18,7 @@ const NavPath: React.FC<Props> = (props) => {
           <use xlinkHref="/sprite.svg#prev" />
         </svg>
       </button>
-      <div className='w-[130px] rounded-10 bg-accent text-white h-10 flex items-center justify-center'>
+      <div className={`w-[130px] rounded-10 text-white h-10 flex items-center justify-center ${pathname.slice(1) ? 'bg-accent' : 'bg-accent-hover'}`}>
         <p className="uppercase">{pathname.slice(1)}</p>
       </div>
     </div>

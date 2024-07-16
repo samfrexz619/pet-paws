@@ -10,6 +10,7 @@ import Gallery from './pages/gallery/Gallery'
 import Likes from './pages/likes/Likes'
 import Favourites from './pages/favourites/Favourites'
 import Dislikes from './pages/dislikes/Dislikes'
+import BreedDetail from './pages/breeds/BreedDetail'
 
 
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: '/breeds',
         element: <Breeds />
+      },
+      {
+        path: '/breeds/:id',
+        element: <BreedDetail />
       },
       {
         path: '/gallery',

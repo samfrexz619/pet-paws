@@ -14,6 +14,7 @@ const useGetCatApi = () => {
       try {
         const res = await catsApi.get('/images/search?limit=20')
         dispatch({ type: 'SET_CAT_IMAGES', payload: res.data })
+        localStorage.setItem('images', JSON.stringify(res.data))
       } catch (error: any) {
         if (error.response) {
           console.error('Server Error:', error.response.status);
@@ -29,6 +30,7 @@ const useGetCatApi = () => {
 
     fetchCatLists()
   }, [])
+
   return {
     catLists: state.catLists,
     loading: state.loading,

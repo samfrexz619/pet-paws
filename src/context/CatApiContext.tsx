@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from "react";
+import React, { createContext, useReducer, useContext, useEffect } from "react";
 import { ActionType, CatApiReducer, StateType } from "../reducers/CatApiReducer";
 
 
@@ -25,6 +25,9 @@ export const CatApiContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const [state, dispatch] = useReducer(CatApiReducer, initialState)
 
+  useEffect(() => {
+    localStorage.setItem('liked-images', JSON.stringify(state.likedImages))
+  }, [state.likedImages])
   return (
     <CatApiContext.Provider value={{ state, dispatch }}>
       {children}

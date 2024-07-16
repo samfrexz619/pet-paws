@@ -55,6 +55,12 @@ input:checked+.toggle__slider::before {
   object-fit: cover;
 }
 
+.gallery {
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+
 .reset {
   scrollbar-width: none;
   -ms-overflow-style: none;

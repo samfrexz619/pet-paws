@@ -1,9 +1,11 @@
 // import { useState } from "react";
+import { useEffect } from "react";
 import useGetCatApi from "@/hooks/useGetCatApi";
 import NavPath from "@/components/voting/NavPath";
 import ImageSlide from "@/components/voting/ImageSlide";
 import ReactionBtns from "@/components/voting/ReactionBtns";
 import ReactionLog from "@/components/voting/ReactionLog";
+import Skeleton from "@/components/loadingState/Skeleton";
 
 
 
@@ -20,6 +22,7 @@ const Voting = () => {
     switch (action) {
       case 'like':
         dispatch({ type: 'SET_LIKED_IMAGES', payload: currentIndex })
+        localStorage.setItem('liked-images', JSON.stringify(likedImages))
         break;
       case 'favorite':
         dispatch({ type: 'SET_FAVORITE_IMAGES', payload: currentIndex })
@@ -33,6 +36,10 @@ const Voting = () => {
     handleNext()
   }
 
+  // useEffect(() => {
+  //   localStorage.setItem('liked-images', JSON.stringify(likedImages))
+  // }, [likedImages])
+
   return (
     <section className="w-96% mx-auto py-3">
       <div className="pt-2 pb-4">
@@ -42,7 +49,7 @@ const Voting = () => {
       {/* cat-image slider */}
       <div className="w-full">
         {loading
-          ? <span>loading...</span>
+          ? <Skeleton loadingCls="h-[180px] md:h-[370px] rounded-10" />
           : (<div className="w-full h-[180px] md:h-[370px] relative">
             {catLists?.map((item, idx) => (
               <div key={item.id}>

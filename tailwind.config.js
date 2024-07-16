@@ -32,6 +32,7 @@ module.exports = {
         grey: {
           DEFAULT: '#8C8C8C',
           pry: '#F8F8F7',
+          sec: '#B2B2B2'
         },
         'pry-dark': '#1D1D1D',
         vote: '#B4B7FF',
@@ -74,5 +75,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+  ],
 }

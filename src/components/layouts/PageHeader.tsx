@@ -14,8 +14,6 @@ const PageHeader: React.FC<Props> = (props) => {
   const { children } = props;
 
   const { pathname } = useLocation()
-  const check = pathname === 'likes'
-  console.log(check)
 
   const emojiLinks = [
     {

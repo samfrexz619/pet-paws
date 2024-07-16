@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Breed } from '@/types/cardTypes';
+import { NavLink } from 'react-router-dom';
+import useImgUrl from '@/hooks/useImgUrl';
 
 interface Props {
   breedImg: Breed;
@@ -8,21 +10,13 @@ interface Props {
   breedId: string;
 }
 
-const URL = 'https://cdn2.thecatapi.com/images'
-
 const BreedImage: React.FC<Props> = (props) => {
 
   const [hoveredImg, setHoveredImg] = useState<null | string>(null)
 
   const { breedImg, index, breed, breedId } = props;
 
-  const [imgUrl, setImgUrl] = useState(`${URL}/${breedImg.reference_image_id}.jpg`);
-
-  const handleError = () => {
-    if (imgUrl.endsWith('.jpg')) {
-      setImgUrl(`${URL}/${breedImg.reference_image_id}.png`);
-    }
-  };
+  const { imgUrl, handleError } = useImgUrl(breedImg)
 
   return (
     <div
@@ -39,9 +33,11 @@ const BreedImage: React.FC<Props> = (props) => {
       />
       {hoveredImg &&
         <div className='absolute top-0 w-full h-[250px] flex justify-center rounded-10 bg-accent/60'>
-          <button className='bg-white text-accent h-9 items-center flex justify-center capitalize absolute bottom-6 w-[90%] rounded-10'>
-            {breed.length > 0 ? breed : 'not identified'}
-          </button>
+          <NavLink to={`${breedId}`} className='absolute bottom-6 w-[90%] flex justify-center capitalize rounded-10 h-9 bg-white'>
+            <button className='w-full h-full text-accent items-center'>
+              {breed.length > 0 ? breed : 'not identified'}
+            </button>
+          </NavLink>
         </div>
       }
     </div>

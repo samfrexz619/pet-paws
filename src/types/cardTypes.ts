@@ -21,11 +21,6 @@ interface weight {
   metric: string;
 }
 
-interface Image {
-  url: string;
-  id: string;
-}
-
 export interface Breed {
   id: string;
   name: string;
@@ -34,5 +29,5 @@ export interface Breed {
   origin: string;
   weight: weight;
   life_span: string;
-  image: Image;
+  reference_image_id: string;
 }
