@@ -55,6 +55,9 @@ module.exports = {
         5: '5px',
         20: '20px',
       },
+      backgroundSize: {
+        '30%': '30%'
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
