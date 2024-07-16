@@ -16,6 +16,10 @@ const BreedDetail: React.FC<Props> = (props) => {
 
   const { imgUrl, handleError } = useImgUrl(breedItem!)
 
+  if (!breedItem) {
+    return <div>Image not found</div>;
+  }
+
   return (
     <section className="w-96% mx-auto py-3">
       <div className='pt-2 flex gap-x-3'>
@@ -32,9 +36,9 @@ const BreedDetail: React.FC<Props> = (props) => {
             onError={handleError}
           />
         </div>
-        <div className="w-full border-2 mt-12 h-[313px] md:h-[204px] relative border-accent-hover rounded-20">
-          <div className='left-1/2 absolute -top-[25px]'>
-            <p className='text-3xl h-[62px] text-center bg-white w-[193px] relative -left-1/2 font-medium'>
+        <div className="w-full border-2 mt-12 h-[313px] md:h-[284px] relative border-accent-hover dark:border-accent/20 rounded-20">
+          <div className='left-1/2 absolute -top-[25px] flex items-center'>
+            <p className='text-3xl h-[62px] text-center dark:bg-white/5 bg-white w-[193px] relative -left-1/2 font-medium pt-2'>
               {breedItem!?.name.length > 10 ? `${breedItem?.name.slice(0, 10)}...` : breedItem?.name}
             </p>
           </div>
@@ -43,21 +47,27 @@ const BreedDetail: React.FC<Props> = (props) => {
             <p className='text-xl pb-5 text-center font-medium text-grey'>Family companion cat</p>
             <div className='grid grid-cols-1 md:grid-cols-2 w-full gap-10'>
               <div className=''>
-                <p className='font-medium text-pry-dark'>Temperament: </p>
+                <p className='font-medium text-pry-dark dark:text-white'>Temperament: </p>
                 <span className='text-grey'>{breedItem?.temperament}</span>
               </div>
               <div className=''>
-                <p className='font-medium text-pry-dark'>
+                <p className='font-medium text-pry-dark dark:text-white'>
                   Origin: <span className='text-grey font-normal'>{breedItem?.origin}</span>
                 </p>
-                <p className='font-medium text-pry-dark'>
+                <p className='font-medium text-pry-dark dark:text-white'>
                   Weight: <span className='text-grey font-normal'>{breedItem?.weight.imperial}</span>
                 </p>
-                <p className='font-medium text-pry-dark'>
+                <p className='font-medium text-pry-dark dark:text-white'>
                   Life span: <span className='text-grey font-normal'>{breedItem?.life_span}</span>
                 </p>
 
               </div>
+            </div>
+
+            <div className='max-h-[120px] overflow-y-scroll reset'>
+              <p className='font-medium pt-3 text-pry-dark dark:text-white'>Description:
+                <span className='text-grey font-normal'> {breedItem?.description}</span>
+              </p>
             </div>
           </div>
         </div>

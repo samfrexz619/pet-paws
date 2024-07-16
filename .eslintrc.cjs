@@ -14,5 +14,10 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    '@typescript-eslint/quotes': 'off',
+    "react/no-unescaped-entities": "off",
+    "no-useless-escape": 0,
+    "avoidEscape": 0,
+    "allowTemplateLiterals": 0
   },
 }
