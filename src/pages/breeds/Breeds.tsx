@@ -57,11 +57,6 @@ const Breeds = () => {
                 ))}
               </SelectContent>
             </Select>
-            {/* <CustomSelect value={selectVal} handleChange={handleChange} triggerCls="outline-none w-full text-grey" contentCls="rounded-10" placeholder="Limit: 10">
-              {selectItems.map(item => (
-                <SelectItem key={item.id} value={`Limit: ${item.name}`}>Limit: {item.name}</SelectItem>
-              ))}
-            </CustomSelect> */}
           </div>
           <button className="h-10 w-10 flex items-center justify-center bg-pry-bg rounded-10 dark:bg-white/5">
             <img src={desc} alt="" />
