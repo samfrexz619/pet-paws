@@ -11,12 +11,13 @@ import asc from '@/assets/images/asc.svg'
 import CustomSelect from "@/components/breeds/CustomSelect";
 import { useGetBreeds } from "@/hooks/useGetBreeds";
 import BreedImage from "@/components/breeds/BreedImage";
+import { Skeleton } from "@/components/ui/skeleton";
 
 
 
 
 const Breeds = () => {
-  const { breeds } = useGetBreeds()
+  const { breeds, loading } = useGetBreeds()
 
   const selectItems = [5, 10, 15, 20]
 
@@ -68,22 +69,24 @@ const Breeds = () => {
       </div>
 
       <section className="w-full max-h-[75vh] overflow-y-scroll reset">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {
-            breeds?.slice(0, parseInt(selectVal)).map((breed) => (
+        {loading ?
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            <Skeleton className="rounded-10 w-full h-[250px] bg-grey" />
+
+          </div>
+
+          : (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {breeds?.slice(0, parseInt(selectVal)).map((breed, index) => (
               <BreedImage
                 key={breed.id}
                 breedImg={breed}
                 breed={breed?.name}
                 breedId={breed.id}
+                index={index}
               />
-            ))
-          }
-          {/* <div className="bg-red-200 rounded-20 h-[316px] row-span-3"></div>
-          <div className="bg-red-200 rounded-20 h-[150px] col-span-2"></div>
-          <div className="bg-red-200 rounded-20 h-[150px] col-span-1"></div>
-          <div className="bg-red-200 rounded-20 h-[150px] row-span-2 col-span-1"></div> */}
-        </div>
+            ))}
+          </div>)
+        }
       </section>
     </section>
   );

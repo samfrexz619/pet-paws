@@ -7,19 +7,20 @@ interface Props {
   breedImg: Breed;
   breed: string;
   breedId: string;
+  index: number;
 }
 
 const BreedImage: React.FC<Props> = (props) => {
 
   const [hoveredImg, setHoveredImg] = useState<null | string>(null)
 
-  const { breedImg, breed, breedId } = props;
+  const { breedImg, breed, breedId, index } = props;
 
   const { imgUrl, handleError } = useImgUrl(breedImg)
 
   return (
     <div
-      className="w-full relative"
+      className={`w-full relative ${index === 0 ? 'col-span-2' : 'col-span-1'}`}
       onMouseEnter={() => setHoveredImg(breedId)}
       onMouseLeave={() => setHoveredImg(null)}
     >

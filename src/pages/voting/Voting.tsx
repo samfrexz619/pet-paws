@@ -5,7 +5,7 @@ import NavPath from "@/components/voting/NavPath";
 import ImageSlide from "@/components/voting/ImageSlide";
 import ReactionBtns from "@/components/voting/ReactionBtns";
 import ReactionLog from "@/components/voting/ReactionLog";
-import Skeleton from "@/components/loadingState/Skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 
 
@@ -49,7 +49,7 @@ const Voting = () => {
       {/* cat-image slider */}
       <div className="w-full">
         {loading
-          ? <Skeleton loadingCls="h-[180px] md:h-[370px] rounded-10" />
+          ? <Skeleton className="h-[180px] md:h-[370px] rounded-20 bg-grey" />
           : (<div className="w-full h-[180px] md:h-[370px] relative">
             {catLists?.map((item, idx) => (
               <div key={item.id}>
