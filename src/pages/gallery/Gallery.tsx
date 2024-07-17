@@ -1,4 +1,3 @@
-// components
 import { useState } from "react";
 import Modal from "@/components/gallery/Modal";
 import NavPath from "@/components/voting/NavPath";
