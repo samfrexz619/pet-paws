@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import NavPath from '@/components/voting/NavPath';
 import { useGetBreeds } from '@/hooks/useGetBreeds';
 import useImgUrl from '@/hooks/useImgUrl';
+import { useEffect } from 'react';
 
 
 const BreedDetail = () => {
@@ -12,6 +13,10 @@ const BreedDetail = () => {
   const breedItem = breeds.find(breed => breed.id === id)
 
   const { imgUrl, handleError } = useImgUrl(breedItem!)
+
+  useEffect(() => {
+    imgUrl
+  }, [id])
 
   if (!breedItem) {
     return <div>Image not found</div>;
@@ -33,9 +38,11 @@ const BreedDetail = () => {
             onError={handleError}
           />
         </div>
-        <div className="w-full border-2 mt-12 h-[313px] md:h-[284px] relative border-accent-hover dark:border-accent/20 rounded-20">
-          <div className='left-1/2 absolute -top-[25px] flex items-center'>
-            <p className='text-3xl h-[62px] text-center dark:bg-white/5 bg-white w-[193px] relative -left-1/2 font-medium pt-2'>
+
+        <div className="w-full border-2 mt-12 h-[313px] md:h-[294px] relative border-accent-hover dark:border-accent/20 rounded-20">
+
+          <div className="left-1/2 absolute -top-[25px] flex items-center">
+            <p className='text-3xl h-[62px] text-center dark:bg-[#292929] bg-white w-[193px] relative -left-1/2 font-medium pt-2'>
               {breedItem!?.name.length > 10 ? `${breedItem?.name.slice(0, 10)}...` : breedItem?.name}
             </p>
           </div>
@@ -61,12 +68,13 @@ const BreedDetail = () => {
               </div>
             </div>
 
-            <div className='max-h-[120px] overflow-y-scroll reset'>
+            <div className='max-h-[100px] mt-2 pb-3 overflow-y-scroll reset'>
               <p className='font-medium pt-3 text-pry-dark dark:text-white'>Description:
                 <span className='text-grey font-normal'> {breedItem?.description}</span>
               </p>
             </div>
           </div>
+
         </div>
       </section>
     </section>
