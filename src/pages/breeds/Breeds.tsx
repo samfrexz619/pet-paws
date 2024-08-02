@@ -107,7 +107,7 @@ const Breeds = () => {
             />
           ))}
         </div>
-        {filteredBreeds.length === 0 && <EmptyState />}
+        {filteredBreeds.length === 0 && !loading && <EmptyState />}
       </section>
     </section>
   );
