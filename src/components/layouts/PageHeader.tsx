@@ -3,6 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Input } from '../ui/input';
 import EmojiIcons from '../ui/EmojiIcon';
 import MobileNav from '../mobile-nav/MobileNav';
+import { useCatApiContext } from '@/context/CatApiContext';
 // componnets
 
 
@@ -14,6 +15,10 @@ const PageHeader: React.FC<Props> = (props) => {
   const { children } = props;
 
   const { pathname } = useLocation()
+
+  const { query, handleQuery } = useCatApiContext()
+
+  console.log(query)
 
   const emojiLinks = [
     {
@@ -43,16 +48,18 @@ const PageHeader: React.FC<Props> = (props) => {
               <MobileNav />
             </div>
             {/* search input */}
-            <div className='relative w-full md:w-[420px] order-3 md:order-none'>
-              <Input type='search' placeholder='Search for breeds by name' />
-              <span className='w-10 dark:bg-accent/20 h-10 text-accent bg-accent-hover rounded-10 flex justify-center items-center absolute right-4 top-2'>
-                <svg width='20' height='20' viewBox='0 0 20 20'>
-                  <use xlinkHref={`/sprite.svg#search`} />
-                </svg>
-              </span>
-            </div>
+            {pathname !== '/voting' &&
+              <div className='relative w-full md:w-[420px] order-3 md:order-none'>
+                <Input onChange={handleQuery} value={query} type='search' placeholder='Search for breeds by name' />
+                <span className='w-10 dark:bg-accent/20 h-10 text-accent bg-accent-hover rounded-10 flex justify-center items-center absolute right-4 top-2'>
+                  <svg width='20' height='20' viewBox='0 0 20 20'>
+                    <use xlinkHref={`/sprite.svg#search`} />
+                  </svg>
+                </span>
+              </div>
+            }
             {/* links */}
-            <div className="flex gap-x-2 order-2 md:order-none">
+            <div className={`flex gap-x-2 order-2 md:order-none ${pathname === '/voting' && 'w-full justify-end'}`}>
               {
                 emojiLinks.map(link => (
                   <NavLink to={link.path}

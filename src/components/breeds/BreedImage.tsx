@@ -28,7 +28,6 @@ const BreedImage: React.FC<Props> = (props) => {
         src={imgUrl}
         alt="cat breed images"
         className='gridImg rounded-10 w-full h-[250px]'
-        // style={{ height: `${Math.random() * (400 - 200) + 200}px` }}
         onError={handleError}
       />
       {hoveredImg &&

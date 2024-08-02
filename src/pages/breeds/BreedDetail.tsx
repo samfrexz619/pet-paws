@@ -4,39 +4,41 @@ import { useGetBreedDetail } from '@/hooks/useGetBreedDetail';
 
 
 
+const URL = 'https://cdn2.thecatapi.com/images';
+
 const BreedDetail = () => {
 
   const { id } = useParams();
 
   const { breedDetail, isLoading } = useGetBreedDetail(id!)
 
-  console.log(breedDetail)
+  const imageUrl = `${URL}/${breedDetail?.reference_image_id!}.jpg`;
 
   // if (!breedDetail) {
   //   return <div>Image not found</div>;
   // }
 
   return (
-    <section className="w-96% mx-auto py-3">
+    <section className="w-96% mx-auto py-3 reset max-h-[750px] overflow-y-scroll">
       <div className='pt-2 flex gap-x-3'>
         <NavPath routeName='BREEDS' />
         <div className='h-10 w-10 rounded-10 bg-accent dark:bg-accent/20 text-white flex items-center justify-center'></div>
       </div>
 
-      <section className='w-full mt-5 reset'>
+      <section className='w-full mt-5 h-full'>
         {isLoading
           ? <div className='w-full h-[180px] rounded-20 bg-grey md:h-[360px] animate-pulse'>
           </div>
           : (<div className="w-full h-[180px] rounded-20 bg-grey md:h-[360px] relative">
             <img
-              src={`https://cdn2.thecatapi.com/images/${breedDetail?.reference_image_id!}.jpg`}
+              src={imageUrl}
               alt={breedDetail?.name!}
               className='gridImg rounded-20 w-full h-full'
             />
           </div>)
         }
 
-        <div className="w-full border-2 mt-12 h-[370px] md:h-[294px] relative border-accent-hover dark:border-accent/20 rounded-20">
+        <div className="w-full border-2 mt-12 h-full py-4 md:py-0 md:h-[324px] relative border-accent-hover dark:border-accent/20 rounded-20">
 
           <div className="left-1/2 absolute -top-[25px] flex items-center">
             <p className='text-3xl h-[62px] text-center dark:bg-[#292929] bg-white w-[193px] relative -left-1/2 font-medium pt-2'>
@@ -44,7 +46,7 @@ const BreedDetail = () => {
             </p>
           </div>
 
-          <div className='pt-10 pb-4 w-[85%] md:w-[80%] mx-auto'>
+          <div className='pt-10 pb-4 w-[92%] md:w-[80%] mx-auto'>
             <p className='text-xl pb-5 text-center font-medium text-grey'>Family companion cat</p>
             <div className='grid grid-cols-1 md:grid-cols-2 w-full gap-10'>
               <div className=''>
@@ -65,9 +67,10 @@ const BreedDetail = () => {
               </div>
             </div>
 
-            <div className='max-h-[100px] mt-2 pb-3 overflow-y-scroll reset'>
+            <div className='max-h-[100px] mt-2 pb-3'>
               <p className='font-medium pt-3 text-pry-dark dark:text-white'>Description:
-                <span className='text-grey font-normal'> {breedDetail?.description}</span>
+                <span className='text-grey font-normal'>
+                  {breedDetail?.description.length! > 220 ? `${breedDetail?.description.slice(0, 220)}...` : `${breedDetail?.description!}`}</span>
               </p>
             </div>
           </div>

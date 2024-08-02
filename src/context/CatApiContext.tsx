@@ -1,10 +1,12 @@
-import React, { createContext, useReducer, useContext, useEffect } from "react";
+import React, { createContext, useReducer, useContext, useEffect, useState } from "react";
 import { ActionType, CatApiReducer, StateType } from "../reducers/CatApiReducer";
 
 
 interface ContextType {
   state: StateType;
-  dispatch: React.Dispatch<ActionType>
+  dispatch: React.Dispatch<ActionType>;
+  query: string;
+  handleQuery: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 
@@ -18,18 +20,29 @@ const initialState: StateType = {
   currentIndex: 0
 }
 
-export const CatApiContext = createContext<ContextType>({ state: initialState, dispatch: () => null })
+export const CatApiContext = createContext<ContextType>({
+  state: initialState,
+  dispatch: () => null,
+  query: '',
+  handleQuery: () => null
+})
 
 
 export const CatApiContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const [state, dispatch] = useReducer(CatApiReducer, initialState)
 
+  const [query, setQuery] = useState('')
+
+  const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value)
+  }
+
   useEffect(() => {
     localStorage.setItem('liked-images', JSON.stringify(state.likedImages))
   }, [state.likedImages])
   return (
-    <CatApiContext.Provider value={{ state, dispatch }}>
+    <CatApiContext.Provider value={{ state, dispatch, query, handleQuery }}>
       {children}
     </CatApiContext.Provider>
   )

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import NavPath from "@/components/voting/NavPath";
 import {
   SelectItem, Select,
@@ -6,21 +6,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import desc from '@/assets/images/desc.svg'
-import asc from '@/assets/images/asc.svg'
 import CustomSelect from "@/components/breeds/CustomSelect";
 import { useGetBreeds } from "@/hooks/useGetBreeds";
 import BreedImage from "@/components/breeds/BreedImage";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useCatApiContext } from "@/context/CatApiContext";
+import EmojiIcons from "@/components/ui/EmojiIcon";
 
 
 
 
 const Breeds = () => {
   const { breeds, loading } = useGetBreeds()
+  const { dispatch, query } = useCatApiContext()
 
   const selectItems = [5, 10, 15, 20]
 
+  const [activeBtn, setActiveBtn] = useState<'asc' | 'desc'>('asc');
 
   const [selectVal, setSelectedVal] = useState('10')
 
@@ -28,7 +30,24 @@ const Breeds = () => {
     setSelectedVal(value)
     console.log(selectVal)
   }
-  // console.log(breeds); 
+
+  const filteredBreeds = useMemo(() => breeds.filter(breed => breed.name.toLowerCase().includes(query.toLowerCase())), [breeds, query])
+
+  const handleDescOrder = (btn: 'desc') => {
+    const sortedBreed = filteredBreeds.sort((a, b) => a.name < b.name ? 1 : -1)
+    dispatch({ type: 'SET_BREEDS', payload: sortedBreed })
+    setActiveBtn(btn)
+  }
+
+  const handleAscOrder = (btn: 'asc') => {
+    const sortedBreed = filteredBreeds.sort((a, b) => a.name > b.name ? 1 : -1)
+    dispatch({ type: 'SET_BREEDS', payload: sortedBreed })
+    setActiveBtn(btn)
+  }
+
+  const btnClass = `h-10 w-10 flex items-center justify-center rounded-10 dark:bg-white/5 ${activeBtn === 'asc' ? 'bg-accent text-white dark:border-2 dark:border-accent/5 dark:text-accent' : 'text-grey bg-pry-bg'}`;
+
+  const btnClassDesc = `h-10 w-10 flex items-center justify-center rounded-10 dark:bg-white/5 ${activeBtn === 'desc' ? 'bg-accent text-white dark:border-2 dark:border-accent/5 dark:text-accent' : 'text-grey bg-pry-bg'}`
 
   return (
     <section className="w-96% mx-auto py-3">
@@ -46,6 +65,7 @@ const Breeds = () => {
             ))}
           </CustomSelect>
         </div>
+
         <div className="flex gap-x-3 mt-4 md:mt-0">
           <div className="flex-1 md:w-[105px]">
             <Select onValueChange={handleChange} defaultValue=''>
@@ -59,11 +79,12 @@ const Breeds = () => {
               </SelectContent>
             </Select>
           </div>
-          <button className="h-10 w-10 flex items-center justify-center bg-pry-bg rounded-10 dark:bg-white/5">
-            <img src={desc} alt="" />
+
+          <button onClick={() => handleAscOrder('asc')} className={btnClass}>
+            <EmojiIcons name="asc" />
           </button>
-          <button className="h-10 w-10 flex items-center justify-center bg-pry-bg rounded-10 dark:bg-white/5">
-            <img src={asc} alt="" />
+          <button onClick={() => handleDescOrder('desc')} className={btnClassDesc}>
+            <EmojiIcons name="desc" />
           </button>
         </div>
       </div>
@@ -75,7 +96,7 @@ const Breeds = () => {
 
           </div>
           : (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {breeds?.slice(0, parseInt(selectVal)).map((breed, index) => (
+            {filteredBreeds?.slice(0, parseInt(selectVal)).map((breed, index) => (
               <BreedImage
                 key={breed.id}
                 breedImg={breed}
