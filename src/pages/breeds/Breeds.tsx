@@ -30,8 +30,12 @@ const Breeds = () => {
     setSelectedVal(value)
     console.log(selectVal)
   }
+  console.time('filter breed')
+
 
   const filteredBreeds = useMemo(() => breeds.filter(breed => breed.name.toLowerCase().includes(query.toLowerCase())), [breeds, query])
+
+  console.timeEnd('filter breed')
 
   const handleDescOrder = (btn: 'desc') => {
     const sortedBreed = filteredBreeds.sort((a, b) => a.name < b.name ? 1 : -1)
@@ -45,9 +49,8 @@ const Breeds = () => {
     setActiveBtn(btn)
   }
 
-  const btnClass = `h-10 w-10 flex items-center justify-center rounded-10 dark:bg-white/5 ${activeBtn === 'asc' ? 'bg-accent text-white dark:border-2 dark:border-accent/5 dark:text-accent' : 'text-grey bg-pry-bg'}`;
+  const btnClass = 'h-10 w-10 flex items-center justify-center rounded-10 dark:bg-white/5';
 
-  const btnClassDesc = `h-10 w-10 flex items-center justify-center rounded-10 dark:bg-white/5 ${activeBtn === 'desc' ? 'bg-accent text-white dark:border-2 dark:border-accent/5 dark:text-accent' : 'text-grey bg-pry-bg'}`
 
   return (
     <section className="w-96% mx-auto py-3">
@@ -80,10 +83,10 @@ const Breeds = () => {
             </Select>
           </div>
 
-          <button onClick={() => handleAscOrder('asc')} className={btnClass}>
+          <button onClick={() => handleAscOrder('asc')} className={`${btnClass} ${activeBtn === 'asc' ? 'bg-accent text-white dark:border-2 dark:border-accent/5 dark:text-accent' : 'text-grey bg-pry-bg'}`}>
             <EmojiIcons name="asc" />
           </button>
-          <button onClick={() => handleDescOrder('desc')} className={btnClassDesc}>
+          <button onClick={() => handleDescOrder('desc')} className={`${btnClass} ${activeBtn === 'desc' ? 'bg-accent text-white dark:border-2 dark:border-accent/5 dark:text-accent' : 'text-grey bg-pry-bg'}`}>
             <EmojiIcons name="desc" />
           </button>
         </div>
@@ -100,8 +103,6 @@ const Breeds = () => {
               <BreedImage
                 key={breed.id}
                 breedImg={breed}
-                breed={breed?.name}
-                breedId={breed.id}
                 index={index}
               />
             ))}

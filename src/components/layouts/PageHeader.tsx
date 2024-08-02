@@ -18,8 +18,6 @@ const PageHeader: React.FC<Props> = (props) => {
 
   const { query, handleQuery } = useCatApiContext()
 
-  console.log(query)
-
   const emojiLinks = [
     {
       path: 'likes',
