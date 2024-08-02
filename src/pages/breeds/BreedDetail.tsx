@@ -19,7 +19,7 @@ const BreedDetail = () => {
   return (
     <section className="w-96% mx-auto py-3">
       <div className='pt-2 flex gap-x-3'>
-        <NavPath />
+        <NavPath routeName='BREEDS' />
         <div className='h-10 w-10 rounded-10 bg-accent dark:bg-accent/20 text-white flex items-center justify-center'></div>
       </div>
 

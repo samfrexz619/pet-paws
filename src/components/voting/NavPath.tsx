@@ -1,8 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
 
+interface Props {
+  routeName?: string;
+}
 
-const NavPath = () => {
+const NavPath: React.FC<Props> = ({ routeName }) => {
+
   const { pathname } = useLocation();
 
   const navigate = useNavigate()
@@ -15,7 +19,7 @@ const NavPath = () => {
         </svg>
       </button>
       <div className={`w-[130px] rounded-10 text-white h-10 flex items-center justify-center ${pathname.slice(1) ? 'bg-accent' : 'bg-accent-hover'}`}>
-        <p className="uppercase">{pathname.slice(1)}</p>
+        <p className="uppercase">{!routeName ? pathname.slice(1) : routeName}</p>
       </div>
     </div>
   );

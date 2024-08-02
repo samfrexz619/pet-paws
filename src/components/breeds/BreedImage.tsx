@@ -33,7 +33,7 @@ const BreedImage: React.FC<Props> = (props) => {
       />
       {hoveredImg &&
         <div className='absolute top-0 w-full h-[250px] flex justify-center rounded-10 bg-accent/60'>
-          <NavLink to={`${breedId}`} className='absolute bottom-6 w-[90%] flex justify-center capitalize rounded-10 h-9 bg-white'>
+          <NavLink to={`breed-detail/${breedId}`} className='absolute bottom-6 w-[90%] flex justify-center capitalize rounded-10 h-9 bg-white'>
             <button className='w-full h-full text-accent items-center'>
               {breed.length > 0 ? breed : 'not identified'}
             </button>

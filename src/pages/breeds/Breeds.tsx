@@ -74,7 +74,6 @@ const Breeds = () => {
             <Skeleton className="rounded-10 w-full h-[250px] bg-grey" />
 
           </div>
-
           : (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {breeds?.slice(0, parseInt(selectVal)).map((breed, index) => (
               <BreedImage
