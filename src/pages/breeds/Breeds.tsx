@@ -94,19 +94,20 @@ const Breeds = () => {
       </div>
 
       <section className="w-full max-h-[75vh] overflow-y-scroll reset">
-        {loading &&
+        {loading ?
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             <Skeleton className="rounded-10 w-full h-[250px] bg-grey" />
-          </div>}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {filteredBreeds?.slice(0, parseInt(selectVal)).map((breed, index) => (
-            <BreedImage
-              key={breed.id}
-              breedImg={breed}
-              index={index}
-            />
-          ))}
-        </div>
+          </div>
+          : (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {filteredBreeds?.slice(0, parseInt(selectVal)).map((breed, index) => (
+              <BreedImage
+                key={breed.id}
+                breedImg={breed}
+                index={index}
+              />
+            ))}
+          </div>)
+        }
         {filteredBreeds.length === 0 && !loading && <EmptyState />}
       </section>
     </section>

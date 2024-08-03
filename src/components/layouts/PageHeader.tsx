@@ -16,7 +16,7 @@ const PageHeader: React.FC<Props> = (props) => {
 
   const { pathname } = useLocation()
 
-  const { query, handleQuery } = useCatApiContext()
+  const { query, setQuery } = useCatApiContext()
 
   const emojiLinks = [
     {
@@ -48,11 +48,16 @@ const PageHeader: React.FC<Props> = (props) => {
             {/* search input */}
             {pathname !== '/voting' &&
               <div className='relative w-full md:w-[420px] order-3 md:order-none'>
-                <Input onChange={handleQuery} value={query} type='search' placeholder='Search for breeds by name' />
-                <span className='w-10 dark:bg-accent/20 h-10 text-accent bg-accent-hover rounded-10 flex justify-center items-center absolute right-4 top-2'>
-                  <svg width='20' height='20' viewBox='0 0 20 20'>
-                    <use xlinkHref={`/sprite.svg#search`} />
-                  </svg>
+                <Input onChange={(e) => setQuery(e.target.value)} value={query} type='search' placeholder='Search for breeds by name' />
+                <span className='w-10 dark:bg-accent/20 h-10 text-accent bg-accent-hover rounded-10 flex justify-center items-center absolute right-4 top-2 transition-all duration-500'>
+                  {query.length > 0
+                    ? (<svg onClick={() => setQuery('')} width='20' height='20' className='cursor-pointer' viewBox='0 0 20 20'>
+                      <use xlinkHref="/sprite.svg#close" />
+                    </svg>)
+                    : (<svg width='20' height='20' viewBox='0 0 20 20'>
+                      <use xlinkHref="/sprite.svg#search" />
+                    </svg>)
+                  }
                 </span>
               </div>
             }
